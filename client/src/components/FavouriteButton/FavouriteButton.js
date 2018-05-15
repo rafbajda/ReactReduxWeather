@@ -6,7 +6,7 @@ export class FavouriteButton extends Component {
   render() {
     return (
       <div>
-          <a className="btn-floating btn-large waves-effect waves-light red pulse">
+          <a className="btn-floating btn-large waves-effect waves-light pulse red accent-2">
           <MaterialIcon icon="whatshot" color="#ffff" />
           </a>
       </div>

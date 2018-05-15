@@ -1,0 +1,16 @@
+.LowerRow{
+    font-weight: 450;
+}
+.breakrow{
+    font-weight: 450;
+}
+
+#mainCard .card{
+    height:100px;
+    overflow: hidden;
+    
+}
+#condition-image{
+    height: 60%;
+    width: 60%;
+}
