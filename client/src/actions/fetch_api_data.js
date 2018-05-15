@@ -1,8 +1,6 @@
 //we import axios since we need to call an API
 import axios from "axios";
 
-
-const API_key = '71fdcc02371146bfb7b84834181405';
 //an action is just a function
 
 export function fetchAPIResponse(city){

@@ -11,7 +11,18 @@ import { bindActionCreators } from 'redux';
 //import the action
 import {fetchAPIResponse} from "../actions/fetch_api_data";
 
+import FavouriteButton from './FavouriteButton/FavouriteButton'
+import Navbar from './Navbar/Navbar'
+import WeatherInformation from './WeatherInformation/WeatherInformation'
+
 class Main extends Component {
+
+  componentWillMount= () =>{
+    //before mounting
+    //make the action
+    //remember we passed an argument
+     this.props.FetchAPIResponse("Paris");
+  }
   //innerState 
   constructor(){
     super();
@@ -49,6 +60,11 @@ class Main extends Component {
   render() {
     return (
       <div>
+        <Navbar />
+        <WeatherInformation WeatherObject = {this.props.apiLocation} />
+      <FavouriteButton />
+
+      {/* <div>
            <div className="form">
 
             <input name="city" placeholder="Paris" onChange ={this.changeHandler} />
@@ -116,6 +132,7 @@ class Main extends Component {
             </div> 
           
         </div>
+      </div> */}
       </div>
     );
   }

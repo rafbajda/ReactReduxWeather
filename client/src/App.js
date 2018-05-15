@@ -25,11 +25,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={StoreRef}>
-        <div className="container">
-          <h1>Weather App </h1>
-          <Main />
-        
-        </div>
+          <Main />        
       </Provider>
     );
   }
