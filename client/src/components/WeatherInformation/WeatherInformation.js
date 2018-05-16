@@ -1,28 +1,73 @@
 import React, { Component } from 'react'
 import MaterialIcon, {colorPallet} from 'material-icons-react';
 import './WeatherInformation.css'
+import {SideNav, Button, SideNavItem, Table} from 'react-materialize'
 
-import FavouriteButton from '../FavouriteButton/FavouriteButton'
+import Favourites from '../Favourites/Favourites'
 
 
-export class WeatherInformation extends Component {
-
-   
-      
+export class WeatherInformation extends Component {  
+    
+      addFavouriteCity(){
+             if(this.props.favouritesObject.includes(this.props.locationObject[0])){
+              console.log('zawiera');
+          } else console.log('nie zawiera')
+      }
+      componentWillMount(){
+        //   if(this.props.favouritesObject.includes(this.props.locationObject[0])){
+        //       console.log('zawiera');
+        //   }
+      }
   render() {
     return (
       <div className = "row">
-        <div className = " col s6 offset-s3">
+      <div className = "col s3">
+        
+      </div>
+
+      
+        <div className = " col s6">
                 <div  id = "mainCard" class="card">  
                     <div class = "row breakrow valign-wrapper">
                         <h4 class = "col s5 offset-s1"><MaterialIcon icon="dashboard"/> Dashboard</h4>
                         <div class = "col s2">
-                            <FavouriteButton />
+                                    <SideNav
+                            trigger={ <Button floating large className='red' waves='light' icon='whatshot' />}
+                            options={{
+                            closeOnClick: true,
+                            menuWidth: 275,
+                                        
+                            }}
+                            >
+                        <SideNavItem userView
+                        user={{
+                            background: './BigCityLife.jpeg',
+                            name: 'Favourite Cities',
+                        }}
+                        />
+
+                                <Table striped = {true}>
+                                <thead>
+                                    <tr>
+                                    <th data-field="id" class = "valign-wrapper">
+                                    <MaterialIcon icon="location_city"/>
+                                    City</th>              
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                <Favourites favouritesObject={this.props.favouritesObject} 
+                            onSearch={this.props.onSearch}/> 
+                                </tbody>
+                            </Table>  
+                            
+                        
+                    </SideNav>
                         </div>
                     </div>
                         <div class = "row ">
                             <div className = "card col s3 offset-s2 pink lighten-3 center-align">
-                                <h6> City: </h6>
+                                <h6> <a id = "AddFavouriteButton" onClick = {this.addFavouriteCity.bind(this)} >
+                                    <MaterialIcon icon="favorite_border" /></a> City: </h6>
                                 <h5 class="LowerRow">{this.props.locationObject[0]}</h5>
                             </div> 
                             <div className = "card col s3 push-s2 pink lighten-3 center-align">

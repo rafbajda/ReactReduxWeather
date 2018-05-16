@@ -9,6 +9,9 @@ import FetchWeather from "./fetch_weather";
 import FetchLocation from "./fetch_location";
 import FetchConditions from "./fetch_conditions";
 
+import FetchFavourites from "./fetch_favourites";
+
+
 //we export combineReducers to gather all the reducers in one export
 
 //combine reducers
@@ -18,7 +21,9 @@ const reducers= combineReducers({
     //well we assign it to another object, in a away
     FetchWeatherReducer : FetchWeather,
     FetchWeatherLocation: FetchLocation,
-    FetchCurrentConditions: FetchConditions
+    FetchCurrentConditions: FetchConditions,
+    FetchWeatherFavourites: FetchFavourites
+
 });
 
 //export the reducers

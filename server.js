@@ -10,16 +10,27 @@ City = require('./models/city');
 mongoose.connect('mongodb+srv://rafbajda:Familiada123@rbcluster-u6ftw.mongodb.net/ReactWeather?retryWrites=true');
 var db = mongoose.connection;
 
-app.get('/api/cities', function(req,res){
+//TO TRZEBA WYWALIC I ZAMIAST DAC TE MONGO
+app.get('/api/cities', (req,res) => {
+    const favourites = [
+        {id:0, name: 'Berlin'},
+        {id:1, name: 'Bialystok'},
+        {id:2, name: 'Warszawa'}
+    ];
+    res.json(favourites);
+});
 
-    City.getCities(function(err, cities){
-        if(err){
-            throw err;
-        }
-        res.json(cities);
-    })
 
-})
+// app.get('/api/cities', function(req,res){
+
+//     City.getCities(function(err, cities){
+//         if(err){
+//             throw err;
+//         }
+//         res.json(cities);
+//     })
+
+// })
 
 app.post('/api/cities', function(req,res){
     var city = req.body;

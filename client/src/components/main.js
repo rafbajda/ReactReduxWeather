@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 //import the connect and bindActionsCreators functions
 //this is important
 //in order to connect the component to the state in Redux
@@ -10,6 +8,8 @@ import { bindActionCreators } from 'redux';
 
 //import the action
 import {fetchAPIResponse} from "../actions/fetch_api_data";
+import {fetchFavourites} from "../actions/fetch_api_favourites";
+
 
 import Navbar from './Navbar/Navbar'
 import WeatherInformation from './WeatherInformation/WeatherInformation'
@@ -17,12 +17,6 @@ import Footer from './Footer/Footer'
 
 class Main extends Component {
 
-  componentWillMount= () =>{
-    //before mounting
-    //make the action
-    //remember we passed an argument
-     this.props.FetchAPIResponse("Paris");
-  }
   //innerState 
   constructor(){
     super();
@@ -37,7 +31,10 @@ class Main extends Component {
     //make the action
     //remember we passed an argument
      this.props.FetchAPIResponse("Paris");
+     this.props.FetchFavourites();
+
   }
+ 
 
   //this is the function to search for the city added
   search = () =>{
@@ -57,13 +54,30 @@ class Main extends Component {
     
   }
 
+  handleSearch = (fav) =>{
+    //in this case I am using state just for this component
+    //doesnt need to be in the general state
+    this.setState({
+      value : fav
+    },()=>{this.search()});
+  
+
+  }
+
   render() {
+
+
     return (
-      <div>
-        <Navbar />
+      <div>              
+       
+        
+        <Navbar onSearch={this.handleSearch.bind(this)}/>
         <WeatherInformation locationObject = {this.props.apiLocation} 
         conditionsObject = {this.props.apiConditions} 
-        apiObject = {this.props.apiResponse}/>
+        apiObject = {this.props.apiResponse}
+        favouritesObject = {this.props.apiFavourites} 
+        onSearch = {this.handleSearch.bind(this)}
+        />
         <Footer />      
       </div>
     );
@@ -79,14 +93,16 @@ function mapStateToProps(state){
   return{
     apiResponse: state.FetchWeatherReducer.weatherData,
     apiLocation : state.FetchWeatherLocation.location,
-    apiConditions: state.FetchCurrentConditions.conditions
+    apiConditions: state.FetchCurrentConditions.conditions,
+    apiFavourites : state.FetchWeatherFavourites.favourites
+
   }
 }
 
 //remember that to call this property using "props.FetchAPIResponse"
 function matchDispatchToProps(dispatch){
   //bind the action to be executed
-  return bindActionCreators({FetchAPIResponse:fetchAPIResponse}, dispatch);
+  return bindActionCreators({FetchAPIResponse:fetchAPIResponse,FetchFavourites:fetchFavourites}, dispatch);
 }
 
 //we export the component using the connect from Redux
