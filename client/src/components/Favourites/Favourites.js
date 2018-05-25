@@ -19,13 +19,12 @@ export class Favourites extends Component {
 
   render() {
     const list = this.props.favouritesObject.map(one =>{
-
         return(              
           <tr>
             <td>
             <div className = "valign-wrapper">            
-              {one}
-              <MaterialIcon icon="close"/>
+              <a onClick={this.handleSubmit.bind(this, one)}>{one}</a>
+              <a onClick={this.props.onDelete.bind(this, 777, one)}><MaterialIcon icon="close"/></a>
             </div>
             </td>
 

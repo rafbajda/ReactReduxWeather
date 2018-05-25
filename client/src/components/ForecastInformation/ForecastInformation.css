@@ -1,0 +1,22 @@
+.card-image{
+    position:relative;
+    height:10rem;
+}
+.card-title{
+    color:black;
+}
+#condition-image{
+    height:7rem;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.displayLabel{
+    font-weight:700;
+}
+#dateRow{
+    font-weight:550;
+}

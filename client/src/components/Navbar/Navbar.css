@@ -10,3 +10,9 @@
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: white;
 }
+#tableRow{
+    background-color: #ee6e73
+}
+.tab{
+    cursor:pointer;
+}

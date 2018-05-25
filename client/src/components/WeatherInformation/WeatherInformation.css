@@ -7,12 +7,12 @@
 
 #mainCard .card{
     height:100px;
-    overflow: scroll;
+    /* overflow: scroll; */
     
 }
 #condition-image{
-    height: 60%;
-    width: 60%;
+   max-height:7rem
+   
 }
 #AddFavouriteButton{
     cursor:pointer;

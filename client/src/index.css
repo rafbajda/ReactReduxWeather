@@ -1,3 +1,9 @@
 body{
   background-color: #fce4ec;
 }
+#forecastMsg{
+  /* color:white; */
+}
+.cityLabel{
+  font-weight:700;
+}
