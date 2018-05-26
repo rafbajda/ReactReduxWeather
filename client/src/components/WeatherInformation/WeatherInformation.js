@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 import MaterialIcon, {colorPallet} from 'material-icons-react';
 import './WeatherInformation.css'
-import {SideNav, Button, SideNavItem, Table} from 'react-materialize'
+import {SideNav, Button, SideNavItem, Table, Toast} from 'react-materialize'
 
 import Favourites from '../Favourites/Favourites'
 
-
 export class WeatherInformation extends Component {  
+  
     
       addFavouriteCity(){
              if(this.props.favouritesObject.includes(this.props.locationObject[0])){
               console.log('zawiera');
+              window.Materialize.toast('City is already favourite!', 2000)
           } else {
               console.log('nie zawiera')
               {this.props.onAdd(123,this.props.locationObject[0])} //CO PODAĆ ZA ID???????
+              window.Materialize.toast('City added to favourites!', 2000)
         }
       }
-      componentWillMount(){
-      }
+     
   render() {
     return (
       <div className = "row">
@@ -34,7 +35,7 @@ export class WeatherInformation extends Component {
                                     <SideNav
                             trigger={ <Button floating large className='red' waves='light' icon='whatshot' />}
                             options={{
-                            closeOnClick: true,
+                            closeOnClick: false,
                             menuWidth: 275,
                                         
                             }}
@@ -59,16 +60,16 @@ export class WeatherInformation extends Component {
                             onSearch={this.props.onSearch.bind(this)}
                             onDelete={this.props.onDelete.bind(this)}/> 
                                 </tbody>
-                            </Table>  
-                            
-                        
+                            </Table>
                     </SideNav>
                         </div>
                     </div>
                         <div className = "row">
                             <div className = "card col s4 offset-s1 pink lighten-3 center-align">
-                                <h6> <a id = "AddFavouriteButton" onClick = {this.addFavouriteCity.bind(this)} >
-                                    <MaterialIcon icon="favorite_border" /></a> City: </h6>
+                                <h6> 
+                                    <a id = "AddFavouriteButton" onClick = {this.addFavouriteCity.bind(this)} >
+                                        <MaterialIcon icon="favorite" />                                    
+                                    </a> City: </h6>
                                 <h5 class="LowerRow">{this.props.locationObject[0]}</h5>
                             </div> 
                             <div className = "card col s4 offset-s2 pink lighten-3 center-align">

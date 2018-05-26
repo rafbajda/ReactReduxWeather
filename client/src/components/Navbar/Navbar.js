@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Navbar.css';
+import {Autocomplete,Collection, CollectionItem} from 'react-materialize'
 
 
 export class Navbar extends Component {
@@ -21,26 +22,24 @@ export class Navbar extends Component {
     e.preventDefault();
   }
 
-  showClues() {
-    if (this.refs.name.value === '') alert('Title is required');
-    else {
+  showClues({target}) {
+    
+    if (target.value !== '') 
       this.setState({
         showResults : true
-      },() => this.props.onClue(this.refs.name.value));
-
-    }
+      },() => this.props.onClue(target.value));
+    
   }
 
-  clickHandler(temp) {
-    if (this.refs.name.value === '') alert('Title is required');
-    else {
-
-      this.props.onSearch(temp);
+  clickHandler(value) {
+    console.log(value);
+    if (value !== '') 
+      this.props.onSearch(value);
+      console.log('tutaj patrz: ', value)
       this.setState({
         showResults : false
       });
-
-    }
+    
   }
 
   switchHandler(switch_state){
@@ -49,24 +48,27 @@ export class Navbar extends Component {
 
 
   render() {
-
-    const list = this.props.cluesObject.map(one => {
-      return (
-        <ul>
-          <li>   <a onClick={this.clickHandler.bind(this, one)}>{one}</a></li>
-        </ul>
-      )
+    let listObj = {};
+    this.props.cluesObject.map((one, i) => {
+      let elem = one;
+      listObj[one] = null;
     })
-
     return (      
       <div>
         <nav>
           <div className="nav-wrapper">
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.handleSubmit.bind(this)} autocomplete="off">
               <div className="input-field">
-                <input onChange={this.showClues.bind(this)} id="search" ref="name" type="search" placeholder="Search city" required />
+                <div class = "row">
+                  <Autocomplete
+                  onChange={this.showClues.bind(this)}
+                  onAutocomplete={this.clickHandler.bind(this)}
+                  id="search"
+                  label='Search city'
+                  data={listObj}
+                />
+                </div>
                 <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
-                <i className="material-icons">close</i>
               </div>
             </form>
           </div>
@@ -87,7 +89,7 @@ export class Navbar extends Component {
                 </li>               
               </ul>
             </div>
-        { this.state.showResults ? <div>{list}</div> : null }
+      
       </div>
     )
   }

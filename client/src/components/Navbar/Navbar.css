@@ -16,3 +16,6 @@
 .tab{
     cursor:pointer;
 }
+.autocomplete-content {
+    position: absolute;
+} 

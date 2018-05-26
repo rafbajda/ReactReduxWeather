@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MaterialIcon, {colorPallet} from 'material-icons-react';
-
+import './Favourites.css'
 
 export class Favourites extends Component {
 

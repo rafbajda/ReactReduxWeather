@@ -27,7 +27,8 @@ class Main extends Component {
     this.state = {
       value: "Paris",
       sercz: "",
-      showResults : true
+      showResults : true,
+      isFavourite: false
     }
   }
 
@@ -35,11 +36,9 @@ class Main extends Component {
 
     this.props.FetchAPIResponse("Paris");
     this.props.FetchAPIForecast("Paris");
-
     this.props.FetchFavourites();
 
   }
-
 
   search = () => {
     this.props.FetchAPIResponse(this.state.value);
@@ -72,7 +71,8 @@ class Main extends Component {
   handleDelete = (ide, nejm) => {
     console.log("DELETE" + ide + " " + nejm);
     { this.props.DeleteFavourites(ide, nejm) }
-
+    window.Materialize.toast('City removed from favourites!', 2000)
+   
   }
 
 
@@ -113,7 +113,9 @@ class Main extends Component {
           favouritesObject={this.props.apiFavourites}
           onSearch={this.handleSearch.bind(this)}
           onDelete={this.handleDelete.bind(this)}
-          onAdd={this.handleSubmit.bind(this)}/>
+          onAdd={this.handleSubmit.bind(this)}
+          isFavourite={this.state.isFavourite}
+          />
           </div>
          : 
          <div className = "row">
@@ -144,7 +146,13 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchAPIResponse: fetchAPIResponse, FetchAPIForecast: fetchAPIForecast, FetchFavourites: fetchFavourites, AddFavourites: addFavourites, DeleteFavourites: deleteFavourites, FetchAPIClue: fetchAPIClue }, dispatch);
+  return bindActionCreators({ 
+    FetchAPIResponse: fetchAPIResponse, 
+    FetchAPIForecast: fetchAPIForecast, 
+    FetchFavourites: fetchFavourites, 
+    AddFavourites: addFavourites, 
+    DeleteFavourites: deleteFavourites, 
+    FetchAPIClue: fetchAPIClue }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Main);
